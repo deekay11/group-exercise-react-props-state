@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import ChuckCard from './components/chuck_card';
 import ChuckInfo from './components/chuck_info';
+import ChuckJoke from './components/chuck_joke';
 import Joke from './joke';
 
 function App() {
@@ -25,18 +26,24 @@ function App() {
 		"id": 4,
 		"joke": "Chuck Norris does not own a stove, oven, or microwave, because revenge is a dish best served cold.",
 	}])
-
+	const filteredJokes = jokes.filter((joke) => joke.id === 3);
 	return (
 		<div className="App">
 
 			<h1>React props and state</h1>
-			<ChuckCard />
+			<ChuckCard  greeting={chuckGreeting} />
 
 			<h2>Chuck Info: </h2>
-			<ChuckInfo />
+			<ChuckInfo whaleSaved={whalesSaved} roundHouseKicks={roundHouseKicks} />
 
 			<h2>Jokes: </h2>
-
+			{jokes.map((joke) => (
+        <ChuckJoke key={joke.id} joke={joke} />
+      ))}
+	  		<h2>Filtered Jokes: </h2>
+			{filteredJokes.map((joke) => (
+        <ChuckJoke key={joke.id} joke={joke} />
+      ))}
 		</div>
 	);
 }
